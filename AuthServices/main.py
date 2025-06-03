@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 import os
 
@@ -12,26 +13,27 @@ app = FastAPI()
 app.include_router(auth.router, prefix='/auth', tags=['auth'])
 app.include_router(employee_accounts.router, prefix='/employee-accounts', tags=['employee-accounts'])
 
-# CORS setup to allow React frontend and other backends to communicate with this API
+# CORS setup to allow React frontend and backend access
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:4000",            # React frontend (local dev)
-        "http://192.168.100.32:4000",       # React frontend (local network)
-        "http://127.0.0.1:9001",            # Another backend (if any)
-        "http://127.0.0.1:9002",            # Another backend (if any)
+        "http://localhost:4000",  # local dev React frontend
+        "http://192.168.100.32:4000",  # local network React frontend
+        "http://127.0.0.1:9001",  # backend port (if needed)
+        "http://127.0.0.1:9002",  # backend port (if needed)
+        "https://my-frontend-services-jqe90kk82-ranjel272s-projects.vercel.app",  # deployed Vercel frontend
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Serve uploaded files from /uploads
+# File uploads
 UPLOAD_DIR_NAME = "uploads"
-os.makedirs(UPLOAD_DIR_NAME, exist_ok=True)  # Ensure the directory exists
+os.makedirs(UPLOAD_DIR_NAME, exist_ok=True)
 app.mount(f"/{UPLOAD_DIR_NAME}", StaticFiles(directory=UPLOAD_DIR_NAME), name=UPLOAD_DIR_NAME)
 
-# Run app (development only)
+# Run the app
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="127.0.0.1", port=9000, reload=True)
+    uvicorn.run("main:app", port=9000, host="127.0.0.1", reload=True)
