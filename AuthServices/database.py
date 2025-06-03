@@ -1,13 +1,12 @@
 import aioodbc
 
-# database config
-server = 'LAPTOP-8KPHOHE5\\SQLEXPRESS'
-database = 'POS'
-username = 'RanjelPOS'
-password = 'Ranjel123'
-driver = 'ODBC Driver 17 for SQL Server'
+# Azure SQL Database config
+server = 'bleupos.database.windows.net'  # Your Azure server name
+database = 'POS'                         # Your Azure database name
+username = 'RanjelPOS'             # Your Azure SQL admin username
+password = 'Ranjel123'         # Your Azure SQL admin password
+driver = 'ODBC Driver 17 for SQL Server' # This stays the same
 
-# async function to get db connection
 async def get_db_connection():
     dsn = (
         f"DRIVER={{{driver}}};"
