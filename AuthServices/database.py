@@ -6,7 +6,7 @@ import aioodbc
 server = os.getenv("DB_SERVER", 'bleupos.database.windows.net')
 database = os.getenv("DB_NAME", 'POS')
 username = os.getenv("DB_USER", 'RanjelPOS')
-password = os.getenv("DB_PASSWORD") # No default for password, should always be set
+password = os.getenv("DB_PASSWORD", 'Ranjel123') # No default for password, should always be set
 driver = os.getenv("DB_DRIVER", 'ODBC Driver 17 for SQL Server')
 
 async def get_db_connection():
