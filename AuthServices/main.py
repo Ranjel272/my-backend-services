@@ -21,7 +21,7 @@ app.add_middleware(
         "http://192.168.100.32:4000",  # local network React frontend
         "http://127.0.0.1:9001",  # backend port (if needed)
         "http://127.0.0.1:9002",  # backend port (if needed)
-        "https://my-frontend-services-jqe90kk82-ranjel272s-projects.vercel.app",  # deployed Vercel frontend
+        "https://my-frontend-services-cazfyviw9-ranjel272s-projects.vercel.app",  # deployed Vercel frontend
     ],
     allow_credentials=True,
     allow_methods=["*"],
