@@ -1,11 +1,10 @@
 import aioodbc
 
-# Azure SQL Database config
-server = 'bleupos.database.windows.net'  # Your Azure server name
-database = 'POS'                         # Your Azure database name
-username = 'RanjelPOS'             # Your Azure SQL admin username
-password = 'Ranjel123'         # Your Azure SQL admin password
-driver = 'ODBC Driver 17 for SQL Server' # This stays the same
+server = 'bleupos.database.windows.net'
+database = 'POS'
+username = 'RanjelPOS'
+password = 'Ranjel123'
+driver = 'ODBC Driver 17 for SQL Server'
 
 async def get_db_connection():
     dsn = (
@@ -14,6 +13,8 @@ async def get_db_connection():
         f"DATABASE={database};"
         f"UID={username};"
         f"PWD={password};"
+        f"Encrypt=yes;"
+        f"TrustServerCertificate=no;"
     )
     conn = await aioodbc.connect(dsn=dsn, autocommit=True)
     return conn
